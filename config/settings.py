@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'CV.apps.CvConfig'
+    # internal apps 
+    'CV.apps.CvConfig',
+    
+    # external apps 
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
