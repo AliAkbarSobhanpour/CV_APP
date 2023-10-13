@@ -120,10 +120,13 @@ STATIC_URL = 'static/'
 if DEBUG:
     STATICFILES_DIRS = [
         os.path.join(BASE_DIR, "static"),
-        "/static/"
+        # "/static/" this line must be if in SubDir have static dir
     ]
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+
+AUTH_USER_MODEL = "CV.CustomUser"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
