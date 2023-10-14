@@ -64,7 +64,7 @@ class Projects(models.Model):
     company_logo = models.ImageField("logo of company",upload_to="logos/",help_text="if project is for a company pls setcompany logo")
     about = RichTextField("about projects")
     technologies = models.ManyToManyField(Technologies)
-
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     class Meta:
         verbose_name = "project"
         verbose_name_plural = "projects"
@@ -74,7 +74,7 @@ class Projects(models.Model):
 class ProfecionalSkills(models.Model):
     skill = models.ForeignKey(Technologies, on_delete=models.CASCADE)
     experiance_lvl = models.IntegerField("experiance level", help_text="this is based on how many year that you are working")
-
+    user= models.ForeignKey(CustomUser, models.CASCADE)
     class Meta:
         verbose_name = "profecional skill"
         verbose_name_plural = "profecional skills"
