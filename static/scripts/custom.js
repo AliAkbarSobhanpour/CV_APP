@@ -16,3 +16,4 @@ toggleButtons.forEach((button, index) => {
 function closeFullscreen() {
     fullscreenImage.style.display = 'none';
 }
+

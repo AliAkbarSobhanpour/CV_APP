@@ -1,6 +1,9 @@
+from collections.abc import Iterable
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
+from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import MaxValueValidator
 # Create your models here.
 
 class CustomUser(AbstractUser):
@@ -9,6 +12,7 @@ class CustomUser(AbstractUser):
     image = models.ImageField("avatar", upload_to="avatars/")
     age = models.IntegerField(blank=True,null=True)
     about = RichTextField("about your self")
+    phone_number = PhoneNumberField("phone number", region="IR", blank=True)
     
 
 class SocialMedia(models.Model):
@@ -57,6 +61,8 @@ class Technologies(models.Model):
         verbose_name = "technology"
         verbose_name_plural = "tecmologies"
 
+    def __str__(self):
+        return self.name
 
 class Projects(models.Model):
     project_name = models.CharField("project name", max_length=200)
@@ -72,10 +78,16 @@ class Projects(models.Model):
 
 
 class ProfecionalSkills(models.Model):
-    skill = models.ForeignKey(Technologies, on_delete=models.CASCADE)
-    experiance_lvl = models.IntegerField("experiance level", help_text="this is based on how many year that you are working")
+    technologies = models.ForeignKey(Technologies, on_delete=models.CASCADE)
+    experiance_lvl = models.IntegerField("experiance level",
+                                        help_text="this is based on how many year that you are working - max value 5",
+                                        validators=[MaxValueValidator(5)])
     user= models.ForeignKey(CustomUser, models.CASCADE)
     class Meta:
         verbose_name = "profecional skill"
         verbose_name_plural = "profecional skills"
+
+    def __str__(self):
+        return self.technologies.name
+    
 
