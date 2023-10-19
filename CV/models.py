@@ -25,6 +25,18 @@ class SocialMedia(models.Model):
         verbose_name_plural = "social medias"
 
 
+class Technologies(models.Model):
+    name = models.CharField("technology title",max_length=200)
+
+    class Meta:
+        verbose_name = "technology"
+        verbose_name_plural = "tecmologies"
+
+    def __str__(self):
+        return self.name
+
+
+
 class WorkExperiance(models.Model):
     position = models.CharField("workin position", max_length=200)
     at = models.CharField("company", max_length=200)
@@ -34,7 +46,7 @@ class WorkExperiance(models.Model):
     until_present = models.BooleanField()
     about = RichTextField("about job", help_text="how it was? \n what do you do there \n and ...")
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-
+    technologies = models.ManyToManyField(Technologies)
     class Meta:
         verbose_name = "work experiance"
         verbose_name_plural = "work experiances"
@@ -54,15 +66,6 @@ class Education(models.Model):
         verbose_name = "education"
         verbose_name_plural = "educations"
 
-class Technologies(models.Model):
-    name = models.CharField("technology title",max_length=200)
-
-    class Meta:
-        verbose_name = "technology"
-        verbose_name_plural = "tecmologies"
-
-    def __str__(self):
-        return self.name
 
 class Projects(models.Model):
     project_name = models.CharField("project name", max_length=200)
