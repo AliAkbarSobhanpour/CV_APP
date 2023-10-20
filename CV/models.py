@@ -26,7 +26,7 @@ class SocialMedia(models.Model):
 
 
 class Technologies(models.Model):
-    name = models.CharField("technology title",max_length=200)
+    name = models.CharField("technology title",max_length=200, unique=True)
 
     class Meta:
         verbose_name = "technology"
