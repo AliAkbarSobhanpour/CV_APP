@@ -41,8 +41,8 @@ class WorkExperiance(models.Model):
     position = models.CharField("workin position", max_length=200)
     at = models.CharField("company", max_length=200)
     at_url = models.URLField("company address", max_length=200)
-    start_date = models.DateTimeField("start date")
-    end_date = models.DateTimeField("end date", blank=True, null=True)
+    start_date = models.DateField("start date")
+    end_date = models.DateField("end date", blank=True, null=True)
     until_present = models.BooleanField()
     about = RichTextField("about job", help_text="how it was? \n what do you do there \n and ...")
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -50,27 +50,35 @@ class WorkExperiance(models.Model):
     class Meta:
         verbose_name = "work experiance"
         verbose_name_plural = "work experiances"
+    
+    def __str__(self):
+        return self.position
 
 class Education(models.Model):
     learned_skill = models.CharField("learned skill", max_length=200)
     from_where = models.CharField("univercity or instutute", max_length=200)
     from_where_url = models.URLField("univercity of instutute url", max_length=200)
-    start_date = models.DateTimeField("start date")
-    end_date = models.DateTimeField("end date", blank=True, null=True)
+    start_date = models.DateField("start date")
+    end_date = models.DateField("end date", blank=True, null=True)
     until_present = models.BooleanField()
     about = RichTextField("about education")
-    certificate = models.URLField("certificate url")
+    certificate = models.ImageField("certificate url", upload_to="certificate/")
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "education"
         verbose_name_plural = "educations"
+    
+    def __str__(self):
+        return self.learned_skill
 
 
 class Projects(models.Model):
     project_name = models.CharField("project name", max_length=200)
-    for_where = models.CharField( "for where", max_length=50, help_text="if is a open surce in github pls github \n if is for a company pls load image for that from link bellow")
-    company_logo = models.ImageField("logo of company",upload_to="logos/",help_text="if project is for a company pls setcompany logo")
+    open_surce = models.BooleanField(help_text="if open surce add this pls wor fill for where field whit github or ..... else fill whit company name and add also add logo")
+    for_where = models.CharField("for where", max_length=50, blank=True, null=True)
+    for_whare_url = models.CharField("for where url", max_length=200, help_text="if project is an open surce or a website pls fill this", blank=True, null=True)
+    company_logo = models.ImageField("logo of company",upload_to="logos/",help_text="if project is for a company pls upload company logo", blank=True, null=True)
     about = RichTextField("about projects")
     technologies = models.ManyToManyField(Technologies)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -78,7 +86,9 @@ class Projects(models.Model):
         verbose_name = "project"
         verbose_name_plural = "projects"
     
-
+    def __str__(self):
+        return self.project_name
+    
 
 class ProfecionalSkills(models.Model):
     technologies = models.ForeignKey(Technologies, on_delete=models.CASCADE)
