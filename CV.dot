@@ -1,6 +1,6 @@
 digraph model_graph {
   // Dotfile by Django-Extensions graph_models
-  // Created: 2023-10-14 05:04
+  // Created: 2023-10-20 06:45
   // Cli Options: CV -o CV.dot
 
   fontname = "Roboto"
@@ -233,6 +233,14 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT COLOR="#7B7B7B" FACE="Roboto">phone_number</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT COLOR="#7B7B7B" FACE="Roboto">PhoneNumberField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">position_name</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">CharField</FONT>
@@ -286,6 +294,32 @@ digraph model_graph {
     <FONT FACE="Roboto">url</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">URLField</FONT>
+    </TD></TR>
+  
+  
+    </TABLE>
+    >]
+
+  CV_models_Technologies [label=<
+    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+    Technologies
+    </B></FONT></TD></TR>
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>id</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">name</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">CharField</FONT>
     </TD></TR>
   
   
@@ -464,32 +498,6 @@ digraph model_graph {
     </TABLE>
     >]
 
-  CV_models_Technologies [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    Technologies
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>id</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">name</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
   CV_models_Projects [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
@@ -565,7 +573,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>skill</B></FONT>
+    <FONT FACE="Roboto"><B>technologies</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -640,6 +648,9 @@ digraph model_graph {
   CV_models_WorkExperiance -> CV_models_CustomUser
   [label=" user (workexperiance)"] [arrowhead=none, arrowtail=dot, dir=both];
 
+  CV_models_WorkExperiance -> CV_models_Technologies
+  [label=" technologies (workexperiance)"] [arrowhead=dot arrowtail=dot, dir=both];
+
   CV_models_Education -> CV_models_CustomUser
   [label=" user (education)"] [arrowhead=none, arrowtail=dot, dir=both];
 
@@ -650,7 +661,7 @@ digraph model_graph {
   [label=" technologies (projects)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   CV_models_ProfecionalSkills -> CV_models_Technologies
-  [label=" skill (profecionalskills)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" technologies (profecionalskills)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   CV_models_ProfecionalSkills -> CV_models_CustomUser
   [label=" user (profecionalskills)"] [arrowhead=none, arrowtail=dot, dir=both];
