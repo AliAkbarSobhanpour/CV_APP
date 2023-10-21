@@ -12,7 +12,6 @@ class TechnologiesAdminForm(forms.ModelForm):
         cleaned_data = super().clean()
 
         field_value = self.cleaned_data.get("name")
-        print(field_value)
         if_exist_value = models.Technologies.objects.filter(name__iexact=field_value).first()
         if if_exist_value:
             self.add_error("name", f"the {if_exist_value} alredy exist")

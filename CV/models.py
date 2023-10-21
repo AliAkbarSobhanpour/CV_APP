@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from phonenumber_field.modelfields import PhoneNumberField
 from django.core.validators import MaxValueValidator
+from django.core.exceptions import ValidationError
 # Create your models here.
 
 class CustomUser(AbstractUser):
@@ -85,7 +86,23 @@ class Projects(models.Model):
     class Meta:
         verbose_name = "project"
         verbose_name_plural = "projects"
+
     
+    #validate : if opensurce id false image must be added 
+    def clean(self):
+
+        if self.open_surce:
+            if self.company_logo:
+                raise ValidationError({"company_logo":"your project is open surce so you can upload a logo pls save again"})
+            else :
+                super().clean()
+        else:
+            if self.company_logo:
+                super().clean()
+            else:
+                raise ValidationError({"company_logo":"pls add company logo"})
+                
+
     def __str__(self):
         return self.project_name
     
