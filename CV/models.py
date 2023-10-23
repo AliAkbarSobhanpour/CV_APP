@@ -121,5 +121,11 @@ class ProfecionalSkills(models.Model):
         return self.technologies.name
     
 class ContactUsData(models.Model):
-    
+    name = models.CharField("name", max_length=200)
+    email = models.EmailField("email", max_length=200)
+    message = models.TextField("messege")
 
+    def __str__(self):
+        return self.name
+    
+    
