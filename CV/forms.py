@@ -16,3 +16,9 @@ class TechnologiesAdminForm(forms.ModelForm):
         
         return cleaned_data
 
+
+class ContactUsDataForm(forms.ModelForm):
+    class Meta:
+        model = models.ContactUsData
+        fields = "__all__"
+        
