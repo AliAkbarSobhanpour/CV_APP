@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'ckeditor',
     "django_extensions",
     'phonenumber_field',
-    "sorl.thumbnail"
+    "sorl.thumbnail",
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [

@@ -1,4 +1,5 @@
 {% load thumbnail %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
@@ -207,19 +208,21 @@
     <div class="row">
       <div class="col-md-7 d-print-none">
         <div class="my-2">
-          <form action="https://formspree.io/your@email.com" method="POST">
+          <form action="{% url "CV-view" %}" method="POST">
+            {% csrf_token %}
             <div class="row">
               <div class="col-6">
-                <input class="form-control" type="text" id="name" name="name" placeholder="Your Name" required>
+                {% render_field form.name class="form-control" type="text" id="name" name="name" placeholder="Your Name" required="" %}
+                {% comment %} <input class="form-control" type="text" id="name" name="name" placeholder="Your Name" required> {% endcomment %}
               </div>
               <div class="col-6">
-                <input class="form-control" type="email" id="email" name="_replyto" placeholder="Your E-mail" required>
+                {% render_field form.email class="form-control" type="email" id="email" name="_replyto" placeholder="Your E-mail"%}
               </div>
             </div>
             <div class="form-group my-2">
-              <textarea class="form-control" style="resize: none;" id="message" name="message" rows="4"  placeholder="Your Message" required></textarea>
+              {% render_field form.message class="form-control" style="resize: none;" id="message" name="message" rows="4"  placeholder="Your Message" %}
             </div>
-            <button class="btn btn-primary mt-2" type="submit">Send</button>
+            <button class="btn btn-primary mt-2" type="submit"> submit </button>
           </form>
         </div>
       </div>
@@ -228,7 +231,7 @@
           <h3 class="h6">Address</h3>
           <div class="pb-2 text-secondary">140, City Center, New York, U.S.A</div>
           <h3 class="h6">Phone</h3>
-          <div class="pb-2 text-secondary">+0718-111-0011</div>
+          <div class="pb-2 text-secondary">{{ user.phone_number.as_national }}</div>
           <h3 class="h6">Email</h3>
           <div class="pb-2 text-secondary">Joyce@company.com</div>
         </div>
@@ -262,7 +265,7 @@
     <footer class="pt-4 pb-4 text-muted text-center d-print-none">
       <div class="container">
         <div class="my-3">
-          <div class="h4">Joyce Harrison</div>
+          <div class="h4">{{ user.first_name }} {{ user.last_name }}</div>
           <div class="footer-nav">
             <nav role="navigation">
               <ul class="nav justify-content-center">
@@ -279,8 +282,7 @@
           </div>
         </div>
         <div class="text-small">
-          <div class="mb-1">&copy; Right Resume. All rights reserved.</div>
-          <div>Design - <a href="https://templateflip.com/" target="_blank">TemplateFlip</a></div>
+          <div class="mb-1">&copy; Right Resume. All rights reserved for {{user.first_name}} {{ user.last_name }}</div>
         </div>
       </div>
     </footer>

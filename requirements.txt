@@ -1,9 +1,13 @@
 asgiref==3.7.2
 Django==4.2.6
+django-case-insensitive-field==1.0.7
 django-ckeditor==6.7.0
 django-extensions==3.2.3
 django-js-asset==2.1.0
 django-phonenumber-field==7.2.0
+django-widget-tweaks==1.5.0
+phonenumberslite==8.13.22
 Pillow==10.0.1
+sorl-thumbnail==12.10.0
 sqlparse==0.4.4
 typing_extensions==4.8.0
