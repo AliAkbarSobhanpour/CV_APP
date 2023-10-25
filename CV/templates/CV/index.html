@@ -19,6 +19,7 @@
     <link href="static/css/bootstrap.min.css?ver=1.2.0" rel="stylesheet">
     <link href="static/css/aos.css?ver=1.2.0" rel="stylesheet">
     <link href="static/css/main.css?ver=1.2.0" rel="stylesheet">
+    <link rel="shortcut icon" href="#">
     <link href="static/css/custom.css" rel="stylesheet">
     <noscript>
       <style type="text/css">
@@ -204,11 +205,14 @@
 
   <hr class="d-print-none"/>
   <div class="contant-section px-3 px-lg-4 pb-4" id="contact">
-    <h2 class="h3 text mb-3">Contact</h2>
+    <h2 class="h3 text mb-3">Contact</h2> 
     <div class="row">
       <div class="col-md-7 d-print-none">
         <div class="my-2">
-          <form action="{% url "CV-view" %}" method="POST">
+          <p class="text-secondary">Phone: {{ user.phone_number.as_national }}</p>
+          <p class="text-secondary">Email: {{ user.email }}</p>
+          <hr class="my-2">
+          <form action="{% url "CV-view" %}" method="POST" id="ContactUsForm">
             {% csrf_token %}
             <div class="row">
               <div class="col-6">
@@ -226,14 +230,11 @@
           </form>
         </div>
       </div>
-      <div class="col">
+      <div class="col-md-5">
         <div class="mt-2">
-          <h3 class="h6">Address</h3>
-          <div class="pb-2 text-secondary">140, City Center, New York, U.S.A</div>
-          <h3 class="h6">Phone</h3>
-          <div class="pb-2 text-secondary">{{ user.phone_number.as_national }}</div>
-          <h3 class="h6">Email</h3>
-          <div class="pb-2 text-secondary">Joyce@company.com</div>
+          <div class="pb-2 text-secondary">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1679.5345916128163!2d51.72425379887471!3d32.65760306220546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fbc49786ce199f3%3A0xbd4d5828b4717fd8!2sJay%20Student%20Dormitory!5e0!3m2!1sen!2s!4v1698225357716!5m2!1sen!2s" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
         </div>
       </div>
       <div class="col d-none d-print-block">
@@ -286,9 +287,11 @@
         </div>
       </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="static/scripts/bootstrap.bundle.min.js?ver=1.2.0"></script>
     <script src="static/scripts/aos.js?ver=1.2.0"></script>
     <script src="static/scripts/main.js?ver=1.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="static/scripts/custom.js"></script>
   </body>
 </html>

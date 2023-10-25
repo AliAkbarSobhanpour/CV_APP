@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import CustomUser, ProfecionalSkills, WorkExperiance, Education, Projects
-from django.http import HttpRequest
+from django.http import HttpRequest, JsonResponse
 from .forms import ContactUsDataForm
 from django.shortcuts import redirect
 # Create your views here.
@@ -19,9 +19,12 @@ def CV_view(request: HttpRequest):
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            return redirect("CV-view")
+            return JsonResponse({'message': 'Data saved successfully!'})
         else:
             form = ContactUsDataForm()
+            errors = form.errors
+            return JsonResponse({'errors': errors}, status=400)
+
 
 
     context = {
