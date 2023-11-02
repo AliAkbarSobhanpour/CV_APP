@@ -24,6 +24,10 @@ class SocialMedia(models.Model):
     class Meta:
         verbose_name = "social media"
         verbose_name_plural = "social medias"
+    
+    def __str__(self):
+        return f"{self.app} | {self.user}"
+    
 
 
 class Technologies(models.Model):
