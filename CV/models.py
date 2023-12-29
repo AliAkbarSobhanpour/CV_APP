@@ -11,10 +11,11 @@ class CustomUser(AbstractUser):
     address = RichTextField("address")
     position_name = models.CharField("position name", max_length=200, help_text="maximum 25 char")
     image = models.ImageField("avatar", upload_to="avatars/")
-    age = models.IntegerField(blank=True,null=True)
+    back_img = models.ImageField('cover', upload_to='covers/',blank=True, null=True)
+    age = models.IntegerField(blank=True, null=True)
     about = RichTextField("about your self")
     phone_number = PhoneNumberField("phone number", region="IR", blank=True)
-    
+
 
 class SocialMedia(models.Model):
     app = models.CharField("app name", max_length=50)
@@ -131,5 +132,22 @@ class ContactUsData(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+
+class Book(models.Model):
+    '''
+        مدل کتاب هایی که خوندم .
+        نکته: about درباره ما کتاب نیست بکله مواردی است که شما از کتاب یاد گرفتی.
+    '''
+    title = models.CharField('book title', max_length=200)
+    author = models.CharField('author', max_length=200)
+    start_date = models.DateField('start reading date', auto_now=True)
+    end_date = models.DateField('end reading date', blank=True, null=True,
+                                help_text='if you set this empty it show will present')
+    about = models.TextField('what you learnd')
+    book_file = models.FileField('book file', upload_to="books/")
+    cover_page_image = models.FileField('cover page image', upload_to='books_cover/')
+    user= models.ForeignKey(CustomUser, models.CASCADE)
+    def __str__(self):
+        return self.title
     

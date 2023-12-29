@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import CustomUser, ProfecionalSkills, WorkExperiance, Education, Projects, SocialMedia
+from .models import CustomUser, ProfecionalSkills, WorkExperiance, Education, Projects, SocialMedia, Book
 from django.http import HttpRequest, JsonResponse
 from .forms import ContactUsDataForm
 from .async_email import send_mail
@@ -24,7 +24,7 @@ async def CV_view(request: HttpRequest):
     educations = Education.objects.filter(user=user).order_by("start_date")
     projects = Projects.objects.filter(user=user)
     socials = SocialMedia.objects.all()
-
+    books = Book.objects.filter(user=user)
     # ---------------------------------------------------------------------------------------------
     # form render ---------------------------------------------------------------------------------
     form = ContactUsDataForm(request.POST or None)
@@ -80,13 +80,14 @@ async def CV_view(request: HttpRequest):
     # context data here ----------------------------------------------------------------------------
     
     context = {
-        "user":user,
+        "user": user,
         "profecional_skills": profecional_skills,
         "work_experiances": work_experiances,
         "educations": educations,
-        "projects":projects,
+        "projects": projects,
         "form": form,
         "socials": socials,
+        'books': books,
         }
     # -----------------------------------------------------------------------------------------------
     return render(request, "CV/index.html",context)

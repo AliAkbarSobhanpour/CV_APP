@@ -96,28 +96,28 @@
 </div>
 <hr class="d-print-none"/>
 <div class="work-experience-section px-3 px-lg-4">
-<h2 class="h3 mb-4">Work Experience</h2>
-<div class="timeline">
-  {% for work_experiance in work_experiances %}
-    <div class="timeline-card timeline-card-primary card shadow-sm">
-      <div class="card-body">
-        <div class="h5 mb-1">{{ work_experiance.position }}<span class="text-muted h6"> at {{ work_experiance.at }} <a href="{{ work_experiance.at_url }}">&#x2197; </a></span></div>
-        <div class="text-muted text-small mb-2">
-          {{ work_experiance.start_date }} - {% if work_experiance.until_present %} Present {% else %} {{ work_experiance.end_date }} {% endif %}
-        </div>
-        <div class="ui gray labels"> 
-          {% for technology in work_experiance.technologies.all %}
-          <p class="ui label"> {{ technology }}</p>
+    <h2 class="h3 mb-4">Work Experience</h2>
+        <div class="timeline">
+          {% for work_experiance in work_experiances %}
+            <div class="timeline-card timeline-card-primary card shadow-sm">
+              <div class="card-body">
+                <div class="h5 mb-1">{{ work_experiance.position }}<span class="text-muted h6"> at {{ work_experiance.at }} <a href="{{ work_experiance.at_url }}">&#x2197; </a></span></div>
+                <div class="text-muted text-small mb-2">
+                  {{ work_experiance.start_date }} - {% if work_experiance.until_present %} Present {% else %} {{ work_experiance.end_date }} {% endif %}
+                </div>
+                <div class="ui gray labels">
+                  {% for technology in work_experiance.technologies.all %}
+                  <p class="ui label"> {{ technology }}</p>
+                  {% endfor %}
+                </div>
+                <br>
+                <div>
+                  {{ work_experiance.about | safe }}
+                </div>
+              </div>
+            </div>
           {% endfor %}
-        </div> 
-        <br>
-        <div>
-          {{ work_experiance.about | safe }}
-        </div>
-      </div>
     </div>
-  {% endfor %}
-  </div>
 </div>
 <hr class="d-print-none"/>
 <div class="page-break"></div>
@@ -165,6 +165,28 @@
             </div>
             <br> 
             <div>{{ project.about | safe}}</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+<hr class="d-print-none"/>
+<div class="page-break"></div>
+<div class="books-section px-3 px-lg-4 pb-4">
+  <h2 class="h3 mb-4">Books that I have read</h2>
+  <div class="timeline">
+    {% for book in books %}
+      <div class="timeline-card timeline-card-success card shadow-sm">
+        <div class="card-body">
+          <div class="h5 mb-1">{{ book.title }}<span class="text-muted h6"> from {{ book.author }}</span>
+              <a href="{{ book.book_file.url }}" target="_blank"><i class="far fa-arrow-alt-circle-down"></i></a></div>
+          <div class="text-muted text-small mb-2"> {{book.start_date}} - {% if book.end_date %} {{ book.end_date }} {% else %} Present {% endif %}</div>
+          <div>
+                {% thumbnail book.cover_page_image "170x270" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" style='float:left; margin-right:10px;'>
+                {% endthumbnail %}
+              <div><p>{{ book.about | safe }}</p></div>
+          </div>
         </div>
       </div>
     {% endfor %}
